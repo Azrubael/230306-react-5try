@@ -1,40 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import '../App.css'
 
-const currentDate = new Date().toDateString()
+export const Input = ({ setCitiesList }) => {
+  const [inputValue, setInputValue] = useState('enter city')
+  const inputRef = useRef(null) 
+  // useRef is a hook that returns a reference to the DOM element
+  
+  const handleOnClick = () => {
+    setCitiesList((currentArray) => [...currentArray, inputValue])
+    setInputValue('')
+    inputRef.current.focus()
+  }
 
-const InputTag = () => {
-  const [inputValue, setInputValue] = useState('empty')
   const handleOnChange = (e) => {
-    console.log('handleOnChange at', currentDate)
     setInputValue(e.target.value)
   }
-  
-  return (
-      <input className='Input'
-        type='text'
-        placeholder='Search...'
-        onChange={handleOnChange}  
-        value={inputValue}
-      />
-  )
-}
 
-const Button = () => {
-  const handleOnClick = (e) => {
-    console.log('handleOnClick at', currentDate)
-  }
-  
-  return(
-    <button className='Button' onClick={handleOnClick}>Submit</button>
-  )
-}
-
-export const Input = () => {
   return (
     <div className='InputWrap'>
-      <InputTag />
-      <Button />
+      <input className='Input'
+        placeholder='Search city...'
+        onChange={handleOnChange}  
+        value={inputValue}
+        ref={inputRef}
+      />
+      <button className='Button' onClick={handleOnClick}>Submit</button>
     </div>
   )
 }

@@ -1,20 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css'
 import { Input } from './input'
-import { Card } from './card'
+import { CardList } from './cardlist'
 
 function App() {
-  const citiesList = ['New York', 'London', 'Tokyo', 'Sydney']
+  const list = ['New York', 'London', 'Tokyo']
+  const [citiesList, setCitiesList] = useState(list)
   return (
     <div className="Main">
-      <Input />
-      <div className="CardList">
-      {
-        citiesList.map((city) => {
-          return <Card key={city} city={city} />
-        })
-      }
-      </div>
+      <Input setCitiesList={setCitiesList}/>
+      <CardList citiesList={ citiesList }/>
     </div>
   )
 }
