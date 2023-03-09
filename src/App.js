@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css'
-import { Input } from './input'
-import { CardList } from './cardlist'
+import { Input } from './components/Input'
+import { CardList } from './components/CardList'
+import { useCitiesList } from './hooks/useCitiesList'
 
 function App() {
-  const list = ['Kyiv', 'Dnipro'] //'New York', 'London', 'Tokyo'
-  const [citiesList, setCitiesList] = useState(JSON.parse(localStorage.getItem('citiesList')) || list)
-
-  useEffect(() => {
-    localStorage.setItem('citiesList', JSON.stringify(citiesList))
-  }, [citiesList])
+  const [citiesList, setCitiesList] = useCitiesList()
 
   return (
     <div className="Main">

@@ -1,35 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import '../App.css'
-import { API_KEY } from '../ssettings.js'
+import { useWeather } from '../hooks/useWeather'
 
 
 export const Card = ({ city }) => {
-  const [data, setData] = useState(null)
   
   const closeOnClick = () => {
     setData(null)
   }
   
-  useEffect(() => {
-    if (!API_KEY) {
-      throw new Error('API_KEY is not defined')
-    }
-    if (!city) {
-      throw new Error('Any city is not defined')
-    }
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=ua`)
-    .then(res => {
-      if (!res.ok) {
-        throw new Error('Something went wrong')
-      }
-      return res.json()
-      })
-    .then(setData)
-    .catch((err) => {
-      setData(null)
-      console.error(err)
-    })
-  }, [city])
+  const [data, setData] = useWeather(city)
 
   if (!data) return null
   const { name, weather, main } = data
