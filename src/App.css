@@ -82,3 +82,13 @@
   margin-top: 4px;
 }
 /* Card finish */
+.closeButton {
+  position: relative;
+  left: 85%;
+  background-color: #3a8ac0;
+  border-radius: 50%;
+  display: flex;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.25);
+}

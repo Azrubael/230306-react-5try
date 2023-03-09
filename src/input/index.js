@@ -2,14 +2,17 @@ import React, { useState, useRef } from 'react'
 import '../App.css'
 
 export const Input = ({ setCitiesList }) => {
-  const [inputValue, setInputValue] = useState('enter city')
+  const placeHolder = 'Enter city'
+  const [inputValue, setInputValue] = useState(placeHolder)
   const inputRef = useRef(null) 
   // useRef is a hook that returns a reference to the DOM element
   
   const handleOnClick = () => {
-    setCitiesList((currentArray) => [...currentArray, inputValue])
-    setInputValue('')
-    inputRef.current.focus()
+    if (inputValue !== placeHolder) {
+      setCitiesList((currentArray) => [...currentArray, inputValue])
+      setInputValue(placeHolder)
+      inputRef.current.focus()
+    }
   }
 
   const handleOnChange = (e) => {
@@ -19,7 +22,7 @@ export const Input = ({ setCitiesList }) => {
   return (
     <div className='InputWrap'>
       <input className='Input'
-        placeholder='Search city...'
+        placeholder={placeHolder}
         onChange={handleOnChange}  
         value={inputValue}
         ref={inputRef}
