@@ -3,40 +3,38 @@ import '../App.css'
 import { API_KEY } from '../ssettings.js'
 
 
-async function fetchWeather(city) {
-  if (!API_KEY) {
-    throw new Error('API_KEY is not defined')
-  }
-  if (!city) {
-    throw new Error('Any city is not defined')
-  }
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=ua`
-  const response = await fetch(url)
-  const data = await response.json()
-  return data
-}
-
 export const Card = ({ city }) => {
   const [data, setData] = useState(null)
-
+  
+  const closeOnClick = () => {
+    setData(null)
+  }
+  
   useEffect(() => {
-    fetchWeather(city)
-    .then(setData) //то же,что .then(d => setData(d))
-    .catch(err => console.error(err))
+    if (!API_KEY) {
+      throw new Error('API_KEY is not defined')
+    }
+    if (!city) {
+      throw new Error('Any city is not defined')
+    }
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=ua`)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Something went wrong')
+      }
+      return res.json()
+      })
+    .then(setData)
+    .catch((err) => {
+      setData(null)
+      console.error(err)
+    })
   }, [city])
 
-  console.log(data)
   if (!data) return null
   const { name, weather, main } = data
   const { description, icon } = weather[0]
   const { temp, humidity, feels_like } = main
-
-  const closeOnClick = () => {
-      // setCitiesList((currentArray) => [...currentArray, inputValue])
-      console.log('closeOnClick', name)
-      setData(null)
-  }
-
 
   return (
     <div className='Card'>

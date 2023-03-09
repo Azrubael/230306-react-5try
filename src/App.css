@@ -1,5 +1,5 @@
 .Main {
-  background-color: #d8d8d8;
+  background-color: #d0d8d8;
   height: 100vh;
   padding:24px;
 }
@@ -17,7 +17,7 @@
   padding: 4px 8px;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-  background-color: #3a8ac0;
+  background-color: #aa8ac0;
   font-size: 18px;
   color: #fff;
   border: none;
@@ -40,7 +40,7 @@
   height: fit-content;
   padding: 12px;
   border-radius: 12px;
-  background-color: #3a8acf;
+  background-color: #aa8ac0;
   font-size: 14px;
   margin-left: 24px;
   box-shadow: 3px 3px 12px 1px rgba(0, 0, 0, 0.25);
@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 .Card:hover .CardTitle {
-  color: #3a8ac0;
+  color: #aa8ac0;
 }
 .MainInfo {
   display: flex;
@@ -84,11 +84,10 @@
 /* Card finish */
 .closeButton {
   position: relative;
-  left: 85%;
-  background-color: #3a8ac0;
-  border-radius: 50%;
-  display: flex;
-  color: #fff;
-  font-size: 16px;
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.25);
+  left: 90%;
+  background-color: #aa8ac0;
+  border-radius: 20%;
+  color: #d0d8d8;
+  font-size: 10px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25);
 }
