@@ -3,7 +3,7 @@ import { Card } from '../card'
 import '../App.css'
 
 export const CardList = ({ citiesList }) => {
-  console.log(citiesList)
+  // console.log(citiesList)
   return (
     <div className='CardList'>
       {

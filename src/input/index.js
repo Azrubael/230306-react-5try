@@ -10,6 +10,13 @@ export const Input = ({ setCitiesList }) => {
   const [inputValue, setInputValue] = useState(placeHolder)
   const inputRef = useRef(null) 
   // useRef is a hook that returns a reference to the DOM element
+
+  const  pressEnter =  (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
+      handleOnClick()
+    }
+  }
   
   const handleOnClick = () => {
     if (!inputValue) return
@@ -31,12 +38,15 @@ export const Input = ({ setCitiesList }) => {
     setInputValue(e.target.value)
   }
 
+
   return (
     <div className='InputWrap'>
       <input className='Input'
+        id="inputfield"
         placeholder={placeHolder}
         onChange={handleOnChange}  
         value={inputValue}
+        onKeyDown={pressEnter}
         ref={inputRef}
       />
       <button className='Button' onClick={handleOnClick}>Add a city</button>
