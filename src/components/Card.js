@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import '../App.css'
 import { useWeather } from '../hooks/useWeather'
 
 
-export const Card = ({ city }) => {
+export const Card = memo(({ city }) => {
   
   const [data, setData] = useWeather(city)
   
@@ -13,10 +13,11 @@ export const Card = ({ city }) => {
   const { temp, humidity, feels_like } = main
   
   const closeOnClick = () => {
-    setData(null)
     let reducedCityList = JSON.parse(localStorage.getItem('citiesList'))
     reducedCityList = reducedCityList.filter(element => element !== name)
+    localStorage.clear()
     localStorage.setItem('citiesList', JSON.stringify(reducedCityList))
+    setData(null)
   }
   
   return (
@@ -34,4 +35,4 @@ export const Card = ({ city }) => {
       </div>
     </div>
   )
-}
+})
