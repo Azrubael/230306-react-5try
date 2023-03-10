@@ -5,17 +5,20 @@ import { useWeather } from '../hooks/useWeather'
 
 export const Card = ({ city }) => {
   
-  const closeOnClick = () => {
-    setData(null)
-  }
-  
   const [data, setData] = useWeather(city)
-
+  
   if (!data) return null
   const { name, weather, main } = data
   const { description, icon } = weather[0]
   const { temp, humidity, feels_like } = main
-
+  
+  const closeOnClick = () => {
+    setData(null)
+    let reducedCityList = JSON.parse(localStorage.getItem('citiesList'))
+    reducedCityList = reducedCityList.filter(element => element !== name)
+    localStorage.setItem('citiesList', JSON.stringify(reducedCityList))
+  }
+  
   return (
     <div className='Card'>
       <button className="closeButton" onClick={closeOnClick}>X</button>
